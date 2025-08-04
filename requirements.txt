@@ -1,0 +1,6 @@
+Flask
+Flask-JWT-Extended
+Flask-PyMongo
+Flask-SQLAlchemy
+psycopg2-binary
+Werkzeug
