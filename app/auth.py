@@ -5,7 +5,7 @@ from app import mongo
 
 auth_bp = Blueprint('auth', __name__)
 
-""" @auth_bp.route('/register', methods=['POST'])
+@auth_bp.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
     username = data['username']
@@ -16,7 +16,7 @@ def register():
 
     mongo.db.users.insert_one({"username": username, "password": password})
     return jsonify({"msg": "Usuario registrado"}), 201
- """
+
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()

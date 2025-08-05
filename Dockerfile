@@ -1,5 +1,5 @@
 # Usa la imagen base oficial de Python
-FROM python:bullseye
+FROM python:3.11-slim-bullseye
 
 
 # Establece el directorio de trabajo
@@ -8,9 +8,9 @@ WORKDIR /app
 # Copia los requisitos de la aplicación
 COPY requirements.txt .
 
-# ---
-## Prepara el entorno del sistema y instala dependencias
-# ---
+# Crear usuario sin privilegios
+
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends gnupg2 curl ca-certificates && \
     apt-get update && \
@@ -35,3 +35,10 @@ COPY . .
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
+RUN useradd -m -s /bin/bash appuser
+
+# Establecer permisos del directorio
+RUN chown -R appuser:appuser /app
+
+# Cambiar al usuario no-root
+USER appuser
